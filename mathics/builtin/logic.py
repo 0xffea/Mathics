@@ -91,4 +91,20 @@ class Not(PrefixOperator):
         'Not[False]': 'True',
     }
     
-        
+class Xor(Builtin):
+    """
+    >> Xor[True, False]
+     = True
+    >> Xor[True, True]
+     = False
+    """
+
+    def apply(self, args, evaluation):
+        'Xor[args___]'
+	from sympy.logic.boolalg import Xor
+
+	args = [x.to_python() for x in args.get_sequence()]
+	if Xor(*args):
+            return Symbol('True')
+        else:
+            return Symbol('False')
